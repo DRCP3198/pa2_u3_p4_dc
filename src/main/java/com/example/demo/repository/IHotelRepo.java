@@ -2,10 +2,25 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.Hotel;
 
 public interface IHotelRepo {
+
+	// INNER JOIN
+	public List<Hotel> seleccionarInnerJoin();
+
+	// RightJoin
+	public List<Hotel> seleccionarOuterRightJoin();
+
+	// LeftJoin
+	public List<Hotel> seleccionarOuterLeftJoin();
 	
-public List<Hotel> seleccionarInnerJoin();
+	public List<Habitacion> seleccionarHabitacionOuterLeftJoin();
+    //Full JOIN
+	public List<Hotel> seleccionarFulltJoin();
+	
+	//JOIN WHERE
+	public List<Hotel> seleccionarWhereJoin();
 
 }
