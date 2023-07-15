@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,41 +28,57 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-       System.out.println("INNER JOIN");
+		
+		List<Habitacion> habitacions= new ArrayList<>();
+		Hotel a = new Hotel();
+		a.setDireccion("12 de octubre");
+		a.setNombre("Norman");
+		
+		Habitacion h = new Habitacion();
+		h.setNumero("NM1");
+		h.setValor(new BigDecimal(250));
+		h.setHotel(a);
+		habitacions.add(h);
+		
+		Habitacion h1 = new Habitacion();
+		h1.setNumero("NM2");
+		h1.setValor(new BigDecimal(230));
+		h1.setHotel(a);
+		habitacions.add(h1);
+		
+		a.setHabitaciones(habitacions);
+		
+		Habitacion h2 = new Habitacion();
+		h2.setNumero("NM3");
+		h2.setValor(new BigDecimal(245));
+		h2.setHotel(a);
+		habitacions.add(h2);
+		
+		a.setHabitaciones(habitacions);
+        this.iHotelService.agregar(a);
+		
+		System.out.println("INNER JOIN");
 		List<Hotel> reporte = this.iHotelService.buscarInnerJoin();
 		for (Hotel hotel : reporte) {
-			System.out.println(hotel);
+			System.out.println(hotel.getNombre());
+			System.out.println("Tiene las siguientes habitaciones");
+			for (Habitacion hab : hotel.getHabitaciones()) {
+				System.out.println(hab.getNumero());
+			}
+
 		}
-		System.out.println("Right Join");
-		List<Hotel> reporte1 = this.iHotelService.buscarOuterRightJoin();
-		for (Hotel hotel1 : reporte1) {
-				System.out.println(hotel1);
-			
+		System.out.println();
+		System.out.println("JOIN FETCH");
+		List<Hotel> reporte1 = this.iHotelService.buscarFetchJoin();
+		for (Hotel hotel : reporte1) {
+			System.out.println(hotel.getNombre());
+			System.out.println("Tiene las siguientes habitaciones");
+			for (Habitacion hab : hotel.getHabitaciones()) {
+				System.out.println(hab.getNumero());
+			}
+
 		}
-		System.out.println("LEFT Join");
-		List<Hotel> reporte2 = this.iHotelService.buscarOuterLeftJoin();
-		for (Hotel hotel2 : reporte2) {
-				System.out.println(hotel2);
-			
-		}
-//		System.out.println("Left Join Habitaciones");
-//		List<Habitacion> reporte3 = this.iHotelService.buscarHabitacionOuterLeftJoin();
-//		for (Habitacion habitacion : reporte3) {
-//			System.out.println(reporte3);
-//		}
-//		
-		System.out.println("FULL Join");
-		List<Hotel> reporte4 = this.iHotelService.buscarFulltJoin();
-		for (Hotel hotel : reporte4) {
-				System.out.println(hotel.getNombre());
-			
-		}
-		System.out.println("WHERE Join");
-		List<Hotel> reporte5 = this.iHotelService.buscarWhereJoin();
-		for (Hotel hotel : reporte5) {
-				System.out.println(hotel);
-			
-		}
+
 	}
 
 }

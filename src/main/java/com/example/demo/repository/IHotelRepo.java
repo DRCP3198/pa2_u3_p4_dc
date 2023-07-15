@@ -6,6 +6,7 @@ import com.example.demo.modelo.Habitacion;
 import com.example.demo.modelo.Hotel;
 
 public interface IHotelRepo {
+	public void insertar(Hotel hotel);
 
 	// INNER JOIN
 	public List<Hotel> seleccionarInnerJoin();
@@ -22,5 +23,8 @@ public interface IHotelRepo {
 	
 	//JOIN WHERE
 	public List<Hotel> seleccionarWhereJoin();
+	
+	//JOIN FETCH
+	public List<Hotel> seleccionarFetchJoin();
 
 }

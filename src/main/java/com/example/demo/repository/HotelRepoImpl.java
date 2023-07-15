@@ -20,56 +20,81 @@ public class HotelRepoImpl implements IHotelRepo {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	//INNER JOIN
+	// INNER JOIN
 	@Override
 	public List<Hotel> seleccionarInnerJoin() {
-		
-		//select * from hotel h  join habitacion ha on h.hote_id=ha.habitacion_id_hotel
-		//hago referencia a donde tengo mi habitación
-		//SELECT h from Hotel h JOIN h.habitaciones ha 
-		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h INNER JOIN h.habitaciones ha ", Hotel.class);
-		return query.getResultList();
+
+		// select * from hotel h join habitacion ha on h.hote_id=ha.habitacion_id_hotel
+		// hago referencia a donde tengo mi habitación
+		// SELECT h from Hotel h JOIN h.habitaciones ha
+		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h INNER JOIN h.habitaciones ha ",
+				Hotel.class);
+		List<Hotel> listaHoteles = query.getResultList();
+		for (Hotel hotel : listaHoteles) {
+			hotel.getHabitaciones().size();
+		}
+		return listaHoteles;
 	}
 
 	@Override
 	public List<Hotel> seleccionarOuterRightJoin() {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h RIGHT JOIN h.habitaciones ha ", Hotel.class);
+		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h RIGHT JOIN h.habitaciones ha ",
+				Hotel.class);
 		return query.getResultList();
-		
+
 	}
 
 	@Override
 	public List<Hotel> seleccionarOuterLeftJoin() {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h LEFT JOIN h.habitaciones ha ", Hotel.class);
+		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h LEFT JOIN h.habitaciones ha ",
+				Hotel.class);
 		return query.getResultList();
-		
+
 	}
 
 	@Override
 	public List<Habitacion> seleccionarHabitacionOuterLeftJoin() {
 		// TODO Auto-generated method stub
-		TypedQuery<Habitacion> query = this.entityManager.createQuery("SELECT ha from Habitacion ha LEFT JOIN ha.hotel h ", Habitacion.class);
+		TypedQuery<Habitacion> query = this.entityManager
+				.createQuery("SELECT ha from Habitacion ha LEFT JOIN ha.hotel h ", Habitacion.class);
 		return query.getResultList();
-		
+
 	}
 
 	@Override
 	public List<Hotel> seleccionarFulltJoin() {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h FULL OUTER JOIN h.habitaciones ha ", Hotel.class);
+		TypedQuery<Hotel> query = this.entityManager
+				.createQuery("SELECT h from Hotel h FULL OUTER JOIN h.habitaciones ha ", Hotel.class);
 		return query.getResultList();
 	}
 
 	@Override
 	public List<Hotel> seleccionarWhereJoin() {
 		// TODO Auto-generated method stub
-		//SELECT h.* FROM hotel h, habitacion ha WHERE h.hote_id= ha.habitacion_id_hotel
-		//SELECT h FROM Hotel h, Habitacion ha WHERE h=ha.hotel
-		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h FROM Hotel h, Habitacion ha WHERE h=ha.hotel", Hotel.class);
+		// SELECT h.* FROM hotel h, habitacion ha WHERE h.hote_id=
+		// ha.habitacion_id_hotel
+		// SELECT h FROM Hotel h, Habitacion ha WHERE h=ha.hotel
+		TypedQuery<Hotel> query = this.entityManager
+				.createQuery("SELECT h FROM Hotel h, Habitacion ha WHERE h=ha.hotel ", Hotel.class);
 		return query.getResultList();
 	}
 
-	
+	// JOIN FETCH
+	@Override
+	public List<Hotel> seleccionarFetchJoin() {
+		TypedQuery<Hotel> query = this.entityManager.createQuery("SELECT h from Hotel h JOIN FETCH h.habitaciones ha ",
+				Hotel.class);
+
+		return query.getResultList();
+
+	}
+
+	@Override
+	public void insertar(Hotel hotel) {
+		// TODO Auto-generated method stub
+		this.entityManager.persist(hotel);
+	}
 }
