@@ -38,7 +38,7 @@ public class Habitacion {
 	//Me sirve para hacer un calculo eventual
 	@Transient
 	private BigDecimal valorIncluidoIva;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name ="habitacion_id_hotel")
 	private Hotel hotel;
 	

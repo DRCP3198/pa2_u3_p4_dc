@@ -9,17 +9,22 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.modelo.Habitacion;
-import com.example.demo.modelo.Hotel;
-import com.example.demo.repository.IHotelRepo;
-import com.example.demo.service.IHabitacionService;
-import com.example.demo.service.IHotelService;
+import com.example.demo.modelo.banco.Cuenta;
+import com.example.demo.modelo.banco.Propietario;
+import com.example.demo.modelo.banco.Transferencia;
+import com.example.demo.modelo.banco.service.ICuentaService;
+import com.example.demo.modelo.banco.service.ITransferenciaService;
 
 @SpringBootApplication
 public class Pa2U3P4DcApplication implements CommandLineRunner {
+	
 
 	@Autowired
-	private IHotelService iHotelService;
+	private ICuentaService iCuentaBancariaService;
+
+	@Autowired
+	private ITransferenciaService iTransferenciaService;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U3P4DcApplication.class, args);
@@ -29,55 +34,39 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		List<Habitacion> habitacions= new ArrayList<>();
-		Hotel a = new Hotel();
-		a.setDireccion("12 de octubre");
-		a.setNombre("Norman");
+		Propietario p = new Propietario();
+		p.setNombre("Henry");
+		p.setApellido("Coyago");
+		p.setCedula("1725247699");
+		List<Cuenta> listaCuenta = new ArrayList<>();
 		
-		Habitacion h = new Habitacion();
-		h.setNumero("NM1");
-		h.setValor(new BigDecimal(250));
-		h.setHotel(a);
-		habitacions.add(h);
-		
-		Habitacion h1 = new Habitacion();
-		h1.setNumero("NM2");
-		h1.setValor(new BigDecimal(230));
-		h1.setHotel(a);
-		habitacions.add(h1);
-		
-		a.setHabitaciones(habitacions);
-		
-		Habitacion h2 = new Habitacion();
-		h2.setNumero("NM3");
-		h2.setValor(new BigDecimal(245));
-		h2.setHotel(a);
-		habitacions.add(h2);
-		
-		a.setHabitaciones(habitacions);
-        this.iHotelService.agregar(a);
-		
-		System.out.println("INNER JOIN");
-		List<Hotel> reporte = this.iHotelService.buscarInnerJoin();
-		for (Hotel hotel : reporte) {
-			System.out.println(hotel.getNombre());
-			System.out.println("Tiene las siguientes habitaciones");
-			for (Habitacion hab : hotel.getHabitaciones()) {
-				System.out.println(hab.getNumero());
-			}
+		Cuenta cuentaOrigen = new Cuenta();
+		cuentaOrigen.setNumero("123345");
+		cuentaOrigen.setPropietario(p);
+		cuentaOrigen.setSaldo(new BigDecimal(4000));
+		cuentaOrigen.setTipo("A");
 
+		
+		Cuenta cuentaDestino = new Cuenta();
+		cuentaDestino.setNumero("0987656");
+		cuentaDestino.setSaldo(new BigDecimal(1000));
+		cuentaDestino.setTipo("A");
+		cuentaDestino.setPropietario(p);
+		
+		
+		listaCuenta.add(cuentaOrigen);
+	    listaCuenta.add(cuentaDestino);
+		p.setCuentas(listaCuenta);
+		
+		//this.iCuentaBancariaService.agregar(cuentaOrigen);
+		//this.iCuentaBancariaService.agregar(cuentaDestino);
+		
+	    //this.iTransferenciaService.transferir(12, 13, new BigDecimal(3000));
+		List<Transferencia> reporte= this.iTransferenciaService.reporte();
+		for (Transferencia transferencia : reporte) {
+			System.out.println(transferencia);
 		}
-		System.out.println();
-		System.out.println("JOIN FETCH");
-		List<Hotel> reporte1 = this.iHotelService.buscarFetchJoin();
-		for (Hotel hotel : reporte1) {
-			System.out.println(hotel.getNombre());
-			System.out.println("Tiene las siguientes habitaciones");
-			for (Habitacion hab : hotel.getHabitaciones()) {
-				System.out.println(hab.getNumero());
-			}
-
-		}
+		
 
 	}
 
