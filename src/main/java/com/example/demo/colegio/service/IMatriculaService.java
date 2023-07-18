@@ -6,6 +6,7 @@ import com.example.demo.colegio.Materia;
 
 public interface IMatriculaService {
 	
-	public void matricular(String cedula, List<Materia> codigos);
-
+	
+	public void matricular(String cedula, List<String> codigos);
+    
 }

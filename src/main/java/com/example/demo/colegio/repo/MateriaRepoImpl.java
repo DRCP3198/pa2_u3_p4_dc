@@ -29,8 +29,8 @@ public class MateriaRepoImpl implements IMateriaRepo {
 		// TODO Auto-generated method stub
 
 		TypedQuery<Materia> typedQuery = this.entityManager
-				.createQuery("SELECT ma Materia ma where ma.codigo=:datoCodigo", Materia.class);
-		typedQuery.setParameter("datodatoCodigo", codigo);
+				.createQuery("SELECT ma from Materia ma where ma.codigo=:datoCodigo", Materia.class);
+		typedQuery.setParameter("datoCodigo", codigo);
 		return typedQuery.getSingleResult();
 	}
 

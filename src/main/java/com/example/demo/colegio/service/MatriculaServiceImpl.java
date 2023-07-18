@@ -26,20 +26,26 @@ public class MatriculaServiceImpl implements IMatriculaService {
 	private IMatriculaRepo iMatriculaRepo;
 	
 	@Override
-	public void matricular(String cedula, List<Materia> codigos) {
+	public void matricular(String cedula, List<String> codigosLista) {
 		// TODO Auto-generated method stub
 		
-		Matricula matricula = new Matricula();
-		matricula.setTipo("ordinaria");
-		matricula.setNumCreditos("100");
-		matricula.setFecha(LocalDate.now());
 		
-		for (Materia materia : codigos) {
-			
+		
+		Estudiante e = this.estudianteRepo.buscar(cedula);
+		for (String codigo : codigosLista) {
+			Materia materia= this.iMateriaRepo.buscar(codigo);
+			Matricula matricula = new Matricula();
+			matricula.setTipo("ordinaria");
+			matricula.setNumCreditos("100");
+			matricula.setFecha(LocalDate.now());
+			matricula.setEstudiante(e);
+			matricula.setMateria(materia);
+			//this.iMateriaRepo.insertar(materia);
+			this.iMatriculaRepo.insertar(matricula);
 		
   		}
-		Estudiante e = this.estudianteRepo.buscar(cedula);
-		matricula.setEstudiante(e);
+	
+         System.out.println("Se Genero la Matricula");	
 		
 	}
 

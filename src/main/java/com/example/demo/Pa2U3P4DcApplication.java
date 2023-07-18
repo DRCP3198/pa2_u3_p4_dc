@@ -9,6 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.demo.colegio.Estudiante;
+import com.example.demo.colegio.Materia;
+import com.example.demo.colegio.service.IEstudianteService;
+import com.example.demo.colegio.service.IMateriaService;
+import com.example.demo.colegio.service.IMatriculaService;
 import com.example.demo.modelo.banco.Cuenta;
 import com.example.demo.modelo.banco.Propietario;
 import com.example.demo.modelo.banco.Transferencia;
@@ -17,14 +22,15 @@ import com.example.demo.modelo.banco.service.ITransferenciaService;
 
 @SpringBootApplication
 public class Pa2U3P4DcApplication implements CommandLineRunner {
-	
 
 	@Autowired
-	private ICuentaService iCuentaBancariaService;
+	private IMatriculaService iMatriculaService;
 
 	@Autowired
-	private ITransferenciaService iTransferenciaService;
+	private IEstudianteService estudianteService;
 
+	@Autowired
+	private IMateriaService iMateriaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U3P4DcApplication.class, args);
@@ -32,40 +38,45 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		
-		Propietario p = new Propietario();
-		p.setNombre("Henry");
-		p.setApellido("Coyago");
-		p.setCedula("1725247699");
-		List<Cuenta> listaCuenta = new ArrayList<>();
-		
-		Cuenta cuentaOrigen = new Cuenta();
-		cuentaOrigen.setNumero("123345");
-		cuentaOrigen.setPropietario(p);
-		cuentaOrigen.setSaldo(new BigDecimal(4000));
-		cuentaOrigen.setTipo("A");
 
 		
-		Cuenta cuentaDestino = new Cuenta();
-		cuentaDestino.setNumero("0987656");
-		cuentaDestino.setSaldo(new BigDecimal(1000));
-		cuentaDestino.setTipo("A");
-		cuentaDestino.setPropietario(p);
+		Estudiante e = new Estudiante();
+		e.setNombre("Henry");
+		e.setApellido("Coyago");
+		e.setCedula("1213141516");
+		e.setFacultad("Filosofía");
+		this.estudianteService.agregar(e);
 		
 		
-		listaCuenta.add(cuentaOrigen);
-	    listaCuenta.add(cuentaDestino);
-		p.setCuentas(listaCuenta);
 		
-		//this.iCuentaBancariaService.agregar(cuentaOrigen);
-		//this.iCuentaBancariaService.agregar(cuentaDestino);
+		Materia mat = new Materia();
+		mat.setAula("A12");
+		mat.setCodigo("1212");
+		mat.setCreditos(100);
+		mat.setNombre("Ciencias Sociales");
+
+		Materia mat1 = new Materia();
+		mat1.setAula("A13");
+		mat1.setCodigo("1213");
+		mat1.setCreditos(100);
+		mat1.setNombre("Ciencias Naturales");
 		
-	    //this.iTransferenciaService.transferir(12, 13, new BigDecimal(3000));
-		List<Transferencia> reporte= this.iTransferenciaService.reporte();
-		for (Transferencia transferencia : reporte) {
-			System.out.println(transferencia);
-		}
+	
+		Materia mat2 = new Materia();
+		mat2.setAula("A14");
+		mat2.setCodigo("1214");
+		mat2.setCreditos(100);
+		mat2.setNombre("Ciencias Matemáticas");
+		
+		
+		this.iMateriaService.agregar(mat);
+		this.iMateriaService.agregar(mat2);
+		this.iMateriaService.agregar(mat1);
+		List<String> codMaterias = new ArrayList<>();
+		codMaterias.add("1214");
+		codMaterias.add("1212");
+		codMaterias.add("1213");
+		this.iMatriculaService.matricular("1213141516", codMaterias);
 		
 
 	}
