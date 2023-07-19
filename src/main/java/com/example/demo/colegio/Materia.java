@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,10 +37,10 @@ public class Materia {
 	@Column(name = "materia_código")
 	private String codigo;
 	
-	@OneToMany(mappedBy = "materia",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "materia")
 	private List<Matricula> matriculas;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "materia_id_semestre")
 	private Semestre semestre;
 

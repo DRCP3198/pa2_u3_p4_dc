@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.colegio.Estudiante;
 import com.example.demo.colegio.Materia;
+import com.example.demo.colegio.Provincia;
+import com.example.demo.colegio.Semestre;
 import com.example.demo.colegio.service.IEstudianteService;
 import com.example.demo.colegio.service.IMateriaService;
 import com.example.demo.colegio.service.IMatriculaService;
@@ -38,33 +41,47 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+        
+		Provincia pro = new  Provincia();
+		pro.setCapital("Quito");
+		pro.setCodPostal("A1234");
+		pro.setNombre("Pichincha");
+//		
+//		Semestre semestre = new Semestre();
+//		semestre.setPeriodo("2023-2024");
+//		semestre.setFechaInicio(LocalDate.now());
+//		semestre.setFechaFin(LocalDate.of(2024, 1, 23));
+//		
+//		
 		
 		Estudiante e = new Estudiante();
-		e.setNombre("Henry");
-		e.setApellido("Coyago");
-		e.setCedula("1213141516");
-		e.setFacultad("Filosofía");
+		e.setNombre("Andres");
+		e.setApellido("Coyantes");
+		e.setCedula("1213141520");
+		e.setFacultad("Ingenieria");
+		
+		//pro.setEstudiante(listaEstudiantes);
+		e.setProvinvia(pro);
 		this.estudianteService.agregar(e);
 		
 		
 		
 		Materia mat = new Materia();
-		mat.setAula("A12");
-		mat.setCodigo("1212");
+		mat.setAula("B12");
+		mat.setCodigo("1314");
 		mat.setCreditos(100);
-		mat.setNombre("Ciencias Sociales");
+		mat.setNombre("Programación");
 
 		Materia mat1 = new Materia();
 		mat1.setAula("A13");
-		mat1.setCodigo("1213");
+		mat1.setCodigo("1315");
 		mat1.setCreditos(100);
-		mat1.setNombre("Ciencias Naturales");
+		mat1.setNombre("Filosofia");
 		
 	
 		Materia mat2 = new Materia();
 		mat2.setAula("A14");
-		mat2.setCodigo("1214");
+		mat2.setCodigo("1316");
 		mat2.setCreditos(100);
 		mat2.setNombre("Ciencias Matemáticas");
 		
@@ -76,7 +93,7 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 		codMaterias.add("1214");
 		codMaterias.add("1212");
 		codMaterias.add("1213");
-		this.iMatriculaService.matricular("1213141516", codMaterias);
+		this.iMatriculaService.matricular("1213141520", codMaterias);
 		
 
 	}

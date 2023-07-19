@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,56 +24,67 @@ public class Provincia {
 	private Integer id;
 
 	@Column(name = "prov_nombre")
-	private Integer nombre;
+	private String nombre;
 
 	@Column(name = "prov_capital")
-	private Integer capital;
+	private String capital;
 
 	@Column(name = "prov_cod_postal")
-	private Integer codPostal;
+	private String codPostal;
 
-	@OneToMany(mappedBy = "provinvia",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "provinvia")
 	private List<Estudiante> estudiante;
-
+     
+	
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getNombre() {
+
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(Integer nombre) {
+
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public Integer getCapital() {
+
+	public String getCapital() {
 		return capital;
 	}
 
-	public void setCapital(Integer capital) {
+
+	public void setCapital(String capital) {
 		this.capital = capital;
 	}
 
-	public Integer getCodPostal() {
+
+	public String getCodPostal() {
 		return codPostal;
 	}
 
-	public void setCodPostal(Integer codPostal) {
+
+	public void setCodPostal(String codPostal) {
 		this.codPostal = codPostal;
 	}
+
 
 	public List<Estudiante> getEstudiante() {
 		return estudiante;
 	}
 
+
 	public void setEstudiante(List<Estudiante> estudiante) {
 		this.estudiante = estudiante;
 	}
+
 
 	@Override
 	public String toString() {
