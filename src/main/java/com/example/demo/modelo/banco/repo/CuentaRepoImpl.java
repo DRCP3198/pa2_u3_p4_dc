@@ -7,6 +7,7 @@ import com.example.demo.modelo.banco.Cuenta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 
 @Transactional
 @Repository
@@ -28,6 +29,7 @@ public class CuentaRepoImpl implements ICuentaRepo {
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRED)
 	public void actualizar(Cuenta cuentaBancaria) {
 		// TODO Auto-generated method stub
 		this.entityManager.merge(cuentaBancaria);

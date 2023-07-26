@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ import com.example.demo.modelo.banco.Cuenta;
 import com.example.demo.modelo.banco.Transferencia;
 import com.example.demo.modelo.banco.repo.ICuentaRepo;
 import com.example.demo.modelo.banco.repo.ITransferenciaRepo;
+
+import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 
 @Service
 public class TransferenciaServiceImpl implements ITransferenciaService{
@@ -28,6 +33,7 @@ public class TransferenciaServiceImpl implements ITransferenciaService{
 	}
 
 	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void transferir(Integer idCuentaOrigen, Integer idCuentaDestino, BigDecimal monto) {
 		// TODO Auto-generated method stub
 		Cuenta origen = this.cuentaRepo.seleccionarPorId(idCuentaOrigen);
@@ -44,11 +50,19 @@ public class TransferenciaServiceImpl implements ITransferenciaService{
 			destino.setSaldo(destino.getSaldo().add(monto));
 			this.cuentaRepo.actualizar(origen);
 			this.cuentaRepo.actualizar(destino);
+			
 		}else {
+			try {
+				
+			} catch (Exception e) {
+				throw new RuntimeException();
+			}
 			System.out.println("Saldo no disponible para el monto ingresado: " + monto);
+			
 		}
 		
 		this.iTransferenciaRepo.insertar(trasf);
+		
 		
 		
 		

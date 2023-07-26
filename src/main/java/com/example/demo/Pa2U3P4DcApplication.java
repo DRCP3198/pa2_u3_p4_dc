@@ -33,40 +33,28 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		Propietario p = new Propietario();
-		p.setNombre("Henry");
-		p.setApellido("Coyago");
-		p.setCedula("1725247699");
-		List<Cuenta> listaCuenta = new ArrayList<>();
+
 		
 		Cuenta cuentaOrigen = new Cuenta();
-		cuentaOrigen.setNumero("123345");
-		cuentaOrigen.setPropietario(p);
+		cuentaOrigen.setNumero("1");
+		//cuentaOrigen.setPropietario(p);
 		cuentaOrigen.setSaldo(new BigDecimal(4000));
 		cuentaOrigen.setTipo("A");
 
 		
 		Cuenta cuentaDestino = new Cuenta();
-		cuentaDestino.setNumero("0987656");
+		cuentaDestino.setNumero("2");
 		cuentaDestino.setSaldo(new BigDecimal(1000));
 		cuentaDestino.setTipo("A");
-		cuentaDestino.setPropietario(p);
+		//cuentaDestino.setPropietario(p);
 		
 		
-		listaCuenta.add(cuentaOrigen);
-	    listaCuenta.add(cuentaDestino);
-		p.setCuentas(listaCuenta);
-		
-		//this.iCuentaBancariaService.agregar(cuentaOrigen);
-		//this.iCuentaBancariaService.agregar(cuentaDestino);
-		
-	    //this.iTransferenciaService.transferir(12, 13, new BigDecimal(3000));
-		List<Transferencia> reporte= this.iTransferenciaService.reporte();
-		for (Transferencia transferencia : reporte) {
-			System.out.println(transferencia);
-		}
-		
+
+	//this.iCuentaBancariaService.agregar(cuentaOrigen);
+	//this.iCuentaBancariaService.agregar(cuentaDestino);
+//		
+	    this.iTransferenciaService.transferir(23,24 , new BigDecimal(10000));
+
 
 	}
 
