@@ -20,7 +20,7 @@ public class TransferenciaRepoImpl implements ITransferenciaRepo{
 	private EntityManager entityManager;
 	
 	@Override
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.MANDATORY)
 	public void insertar(Transferencia transferencia) {
 		// TODO Auto-generated method stub
 	
@@ -29,6 +29,7 @@ public class TransferenciaRepoImpl implements ITransferenciaRepo{
 	}
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Transferencia> seleccionarTodos() {
 		// TODO Auto-generated method stub
 		TypedQuery<Transferencia> myQuery = this.entityManager.createQuery("select t from Transferencia t",
