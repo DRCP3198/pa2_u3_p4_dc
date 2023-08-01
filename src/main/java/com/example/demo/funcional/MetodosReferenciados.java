@@ -21,4 +21,22 @@ public class MetodosReferenciados {
 			return true;
 		}
 
+		public String aplicar(Integer arg) {
+			
+			Integer numero=10;
+			String valorFinal= numero.toString().concat("Mi mama me mima");
+			
+			return  valorFinal;
+		}
+		
+		public Integer aplicarUnary(Integer arg) {
+			 
+			if(arg.compareTo(100)>0) {
+				arg=arg*100;
+			}else {
+				arg=arg+200;
+			}
+			
+			return arg;
+		}
 }

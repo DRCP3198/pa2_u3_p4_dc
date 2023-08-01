@@ -94,13 +94,21 @@ public class Main {
 		};
 		LOG.info("Function lambda 6: " + function1.aplicar(10));
 		
+		//4.2.-Métodos referenciados
+		IPersonaFunction<String, Integer> function2= metodos::aplicar;
+		LOG.info("Función metodos referenciados: "+ function2.aplicar(12));
+		
 		//5.-UNARYOPERATOR
+		//5.1 Lambdas
 		IPersonaUnaryOperator<Integer> unaryOperator= numero-> numero + (numero*2);
 		LOG.info("UnaryOperator lambda 7: " + unaryOperator.aplicar(4));
 	
 		IPersonaUnaryOperatorFunction<Integer> unaryOperato2= numero-> numero + (numero*2);
 		LOG.info("UnaryOperatorFunction lambda 8: " + unaryOperato2.aplicar(4));
 	
+		//5.2.-Métodos referenciados
+		IPersonaUnaryOperator<Integer> unaryOperator3= metodos::aplicarUnary;
+		LOG.info("UnaryOperator método referenciado: " +unaryOperator3.aplicar(99));
 	}
 
 }
