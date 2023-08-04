@@ -114,81 +114,81 @@ public class Main {
 //		//5.2.-Métodos referenciados
 //		IPersonaUnaryOperator<Integer> unaryOperator3= metodos::aplicarUnary;
 //		LOG.info("UnaryOperator método referenciado: " +unaryOperator3.aplicar(99));
-
-		// ****************MÉTODOS HIGH ORDER*****************************
-		// SUPPLIER
-		MetodosHighOrder highOrder = new MetodosHighOrder();
-		IPersonaSupplier<String> supplierHO = new PersonaSupplierImpl();
-		// 1.-Mediante Clase
-		highOrder.metodo(supplierHO);
-		// 2.-Mediante Lambdas
-		highOrder.metodo(() -> "1751457167HO");
-		// 3.-Métodos referenciados
-		highOrder.metodo(MetodosReferenciados::getIdHO);
-
-		// CONSUMER
-		IPersonaConsumer<String> consumerHO = new PersonaConsumerImpl();
-
-		// 1.-Mediante Clase
-		highOrder.metodoHoConsumer(consumerHO, "Hola Mundo");
-		// 2.-Mediante Lambdas
-		highOrder.metodoHoConsumer(cadena -> LOG.info(cadena), "Lambdas Consumer");
-		highOrder.metodoHoConsumer(cadena -> {
-			LOG.info("1");
-			LOG.info("2");
-			LOG.info(cadena);
-		}, "DILLAN RENATO COLOMA POZO");
-
-		// 3.Mediate Referenciados
-		highOrder.metodoHoConsumer(MetodosReferenciados::aceptar, "Metodos High Order");
-
-		// PREDICATE
-		LOG.info("*************PREDICATE*************");
-		MetodosHighOrder highOrderPredicate = new MetodosHighOrder();
-		IPersonaPredicate<Integer> predicateHO = new PersonaPredicateImpl();
-		// 1.-Mediante Clase
-		LOG.info("1.-Mediante Clase " + highOrderPredicate.metodoPredicate(predicateHO, 20));
-		// 2.-Mediante Lambdas
-		LOG.info("2.-Mediante Lambdas " + highOrderPredicate.metodoPredicate(valor -> {
-			Integer valor2 = 10;
-			valor = valor + valor2;
-			if (valor.compareTo(100) > 0) {
-				return true;
-			} else {
-				return false;
-			}
-		}, 210));
-		;
-		// 3.Mediate Referenciados
-		LOG.info("3.Mediate Referenciados: "
-				+ highOrderPredicate.metodoPredicate(MetodosReferenciados::predicateHo, 30));
-
-		// FUNCTION
-		LOG.info("*************FUNCTION*************");
-		MetodosHighOrder highOrderFunction = new MetodosHighOrder();
-		IPersonaFunction<String, Integer> fuctionHo = new PersonaFunctionImpl();
-		// 1.-Mediante Clase
-		LOG.info("1.-Mediante Clase " + highOrderFunction.metodoFuntion(fuctionHo, 13));
-		// 2.-Mediante Lambdas
-
-		LOG.info("2.-Mediante Lambdas " + highOrderFunction.metodoFuntion(numero -> {
-			String valorFinal = numero.toString().concat("valor");
-			return valorFinal;
-		}, 15));
-		// 3.Mediate Referenciados
-		LOG.info("3.-Mediate Referenciados "
-				+ highOrderFunction.metodoFuntion(MetodosReferenciados::functionReferenciado, 140));
-
-		// UNARY OPERATOR
-		LOG.info("*************UNARY OPERATOR*************");
-		MetodosHighOrder highOrderUnaryOperator = new MetodosHighOrder();
-		IPersonaUnaryOperator<Integer> unaryHo = new PersonaUnariOperatorImpl();
-		// 1.-Mediante Clase
-		LOG.info("1.-Mediante Clase " + highOrderUnaryOperator.metodoUnaryOperator(unaryHo, 200));
-		// 2.-Mediante Lambdas
-		LOG.info("2.-Mediante Lambdas " + highOrderUnaryOperator.metodoUnaryOperator(numero -> numero + (numero * 2), 15));
-		// 3.Mediate Referenciados
-		LOG.info("3.-Mediate Referenciados "+ highOrderFunction.metodoUnaryOperator(MetodosReferenciados::aplicarUnary,16));
+//
+//		// ****************MÉTODOS HIGH ORDER*****************************
+//		// SUPPLIER
+//		MetodosHighOrder highOrder = new MetodosHighOrder();
+//		IPersonaSupplier<String> supplierHO = new PersonaSupplierImpl();
+//		// 1.-Mediante Clase
+//		highOrder.metodo(supplierHO);
+//		// 2.-Mediante Lambdas
+//		highOrder.metodo(() -> "1751457167HO");
+//		// 3.-Métodos referenciados
+//		highOrder.metodo(MetodosReferenciados::getIdHO);
+//
+//		// CONSUMER
+//		IPersonaConsumer<String> consumerHO = new PersonaConsumerImpl();
+//
+//		// 1.-Mediante Clase
+//		highOrder.metodoHoConsumer(consumerHO, "Hola Mundo");
+//		// 2.-Mediante Lambdas
+//		highOrder.metodoHoConsumer(cadena -> LOG.info(cadena), "Lambdas Consumer");
+//		highOrder.metodoHoConsumer(cadena -> {
+//			LOG.info("1");
+//			LOG.info("2");
+//			LOG.info(cadena);
+//		}, "DILLAN RENATO COLOMA POZO");
+//
+//		// 3.Mediate Referenciados
+//		highOrder.metodoHoConsumer(MetodosReferenciados::aceptar, "Metodos High Order");
+//
+//		// PREDICATE
+//		LOG.info("*************PREDICATE*************");
+//		MetodosHighOrder highOrderPredicate = new MetodosHighOrder();
+//		IPersonaPredicate<Integer> predicateHO = new PersonaPredicateImpl();
+//		// 1.-Mediante Clase
+//		LOG.info("1.-Mediante Clase " + highOrderPredicate.metodoPredicate(predicateHO, 20));
+//		// 2.-Mediante Lambdas
+//		LOG.info("2.-Mediante Lambdas " + highOrderPredicate.metodoPredicate(valor -> {
+//			Integer valor2 = 10;
+//			valor = valor + valor2;
+//			if (valor.compareTo(100) > 0) {
+//				return true;
+//			} else {
+//				return false;
+//			}
+//		}, 210));
+//		;
+//		// 3.Mediate Referenciados
+//		LOG.info("3.Mediate Referenciados: "
+//				+ highOrderPredicate.metodoPredicate(MetodosReferenciados::predicateHo, 30));
+//
+//		// FUNCTION
+//		LOG.info("*************FUNCTION*************");
+//		MetodosHighOrder highOrderFunction = new MetodosHighOrder();
+//		IPersonaFunction<String, Integer> fuctionHo = new PersonaFunctionImpl();
+//		// 1.-Mediante Clase
+//		LOG.info("1.-Mediante Clase " + highOrderFunction.metodoFuntion(fuctionHo, 13));
+//		// 2.-Mediante Lambdas
+//
+//		LOG.info("2.-Mediante Lambdas " + highOrderFunction.metodoFuntion(numero -> {
+//			String valorFinal = numero.toString().concat("valor");
+//			return valorFinal;
+//		}, 15));
+//		// 3.Mediate Referenciados
+//		LOG.info("3.-Mediate Referenciados "
+//				+ highOrderFunction.metodoFuntion(MetodosReferenciados::functionReferenciado, 140));
+//
+//		// UNARY OPERATOR
+//		LOG.info("*************UNARY OPERATOR*************");
+//		MetodosHighOrder highOrderUnaryOperator = new MetodosHighOrder();
+//		IPersonaUnaryOperator<Integer> unaryHo = new PersonaUnariOperatorImpl();
+//		// 1.-Mediante Clase
+//		LOG.info("1.-Mediante Clase " + highOrderUnaryOperator.metodoUnaryOperator(unaryHo, 200));
+//		// 2.-Mediante Lambdas
+//		LOG.info("2.-Mediante Lambdas " + highOrderUnaryOperator.metodoUnaryOperator(numero -> numero + (numero * 2), 15));
+//		// 3.Mediate Referenciados
+//		LOG.info("3.-Mediate Referenciados "+ highOrderFunction.metodoUnaryOperator(MetodosReferenciados::aplicarUnary,16));
 
 		// **************PROGRAMACIÓN INTERFACES FUNCIONALES
 		// JAVA****************************
@@ -223,6 +223,42 @@ public class Main {
 //			return num;
 //			});
 //			listaCambiada2.forEach(cadena->LOG.info(cadena.toString()));
+		
+		//METODO HIGHT ORDER JAVA
+        List <Integer> numeros= Arrays.asList(1,2,3,4,7,8,9,10,11,12,13,14);
+        
+      
+        LOG.info("1.-SUPPLIER");
+
+        Stream <String> listaF1=  Stream.generate(MetodosReferenciados::getIdHO).limit(5);
+        listaF1.forEach(cadena-> LOG.info(cadena));
+
+
+
+      
+        LOG.info("2.-CONSUMER");
+        numeros.forEach(MetodosReferenciados::aceptarConsumer);
+
+
+      
+        LOG.info("3.-PREDICATE");
+        Stream<Integer> listaF= numeros.stream().filter(MetodosReferenciados::evaluar);
+        listaF.forEach(num-> LOG.info(num.toString()));
+
+        LOG.info("4.-FUNCTION");
+
+        Stream<String> listaF2= numeros.stream().map(MetodosReferenciados::functionReferenciado);
+        listaF2.forEach(cadena-> LOG.info(cadena.toString()));
+
+
+       
+        LOG.info("5.-UNARYOPERATOR");
+        Stream<Integer> listaF3= numeros.stream().map(MetodosReferenciados::aplicarUnary);
+        listaF3.forEach(num-> LOG.info(num.toString()));
+
+
+
+
 	}
 
 }

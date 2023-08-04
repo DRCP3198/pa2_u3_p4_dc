@@ -20,10 +20,12 @@ public class MetodosReferenciados {
 		 String cadena = "Dillan";
 		 LOG.info(cadena + " "+ arg);
 	 }
-		public boolean evaluar(String arg) {
-			String nombre= "Renato";
-			nombre.contains("a");
-			return true;
+	 public static void aceptarConsumer(Integer id) {
+		 LOG.info("id: "+id);
+	 }
+		public static boolean evaluar(Integer numero) {
+		
+			return numero<2;
 		}
 		public boolean evaluarPredicate(String arg) {
 			String nombre= "Renato";
