@@ -126,6 +126,7 @@ public class Main {
 		// 3.-Métodos referenciados
 		highOrder.metodo(MetodosReferenciados::getIdHO);
 
+		// CONSUMER
 		IPersonaConsumer<String> consumerHO = new PersonaConsumerImpl();
 
 		// 1.-Mediante Clase
@@ -141,39 +142,87 @@ public class Main {
 		// 3.Mediate Referenciados
 		highOrder.metodoHoConsumer(MetodosReferenciados::aceptar, "Metodos High Order");
 
+		// PREDICATE
+		LOG.info("*************PREDICATE*************");
+		MetodosHighOrder highOrderPredicate = new MetodosHighOrder();
+		IPersonaPredicate<Integer> predicateHO = new PersonaPredicateImpl();
+		// 1.-Mediante Clase
+		LOG.info("1.-Mediante Clase " + highOrderPredicate.metodoPredicate(predicateHO, 20));
+		// 2.-Mediante Lambdas
+		LOG.info("2.-Mediante Lambdas " + highOrderPredicate.metodoPredicate(valor -> {
+			Integer valor2 = 10;
+			valor = valor + valor2;
+			if (valor.compareTo(100) > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}, 210));
+		;
+		// 3.Mediate Referenciados
+		LOG.info("3.Mediate Referenciados: "
+				+ highOrderPredicate.metodoPredicate(MetodosReferenciados::predicateHo, 30));
+
+		// FUNCTION
+		LOG.info("*************FUNCTION*************");
+		MetodosHighOrder highOrderFunction = new MetodosHighOrder();
+		IPersonaFunction<String, Integer> fuctionHo = new PersonaFunctionImpl();
+		// 1.-Mediante Clase
+		LOG.info("1.-Mediante Clase " + highOrderFunction.metodoFuntion(fuctionHo, 13));
+		// 2.-Mediante Lambdas
+
+		LOG.info("2.-Mediante Lambdas " + highOrderFunction.metodoFuntion(numero -> {
+			String valorFinal = numero.toString().concat("valor");
+			return valorFinal;
+		}, 15));
+		// 3.Mediate Referenciados
+		LOG.info("3.-Mediate Referenciados "
+				+ highOrderFunction.metodoFuntion(MetodosReferenciados::functionReferenciado, 140));
+
+		// UNARY OPERATOR
+		LOG.info("*************UNARY OPERATOR*************");
+		MetodosHighOrder highOrderUnaryOperator = new MetodosHighOrder();
+		IPersonaUnaryOperator<Integer> unaryHo = new PersonaUnariOperatorImpl();
+		// 1.-Mediante Clase
+		LOG.info("1.-Mediante Clase " + highOrderUnaryOperator.metodoUnaryOperator(unaryHo, 200));
+		// 2.-Mediante Lambdas
+		LOG.info("2.-Mediante Lambdas " + highOrderUnaryOperator.metodoUnaryOperator(numero -> numero + (numero * 2), 15));
+		// 3.Mediate Referenciados
+		LOG.info("3.-Mediate Referenciados "+ highOrderFunction.metodoUnaryOperator(MetodosReferenciados::aplicarUnary,16));
+
 		// **************PROGRAMACIÓN INTERFACES FUNCIONALES
 		// JAVA****************************
 
 		// 1.-Supplier
 
-		Stream<String> lista = Stream.generate(() -> "1751457167").limit(10);
-		lista.forEach(cadena -> LOG.info(cadena));
-
-		// 2.-Consumer
-		List<Integer> listaNumeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-		listaNumeros.forEach(cadena -> {
-			LOG.info("" + cadena);
-		});
-
-		// 3.-Predicate
-		Stream<Integer> listaFinal = listaNumeros.stream().filter(numero -> numero >= 5);
-		listaFinal.forEach(numero -> LOG.info("valor: " + numero));
-
-		// 4.-Function
-		Stream<String>listaCambiada= listaNumeros.stream().map(numero->{
-		Integer num=10;
-		num=numero+num;
-		return "N: "+num;
-		});
-		listaCambiada.forEach(cadena->LOG.info(cadena));
-
-		//5.-UnaryOperator
-		Stream<Integer>listaCambiada2= listaNumeros.stream().map(numero->{
-			Integer num=10;
-			num=numero+num;
-			return num;
-			});
-			listaCambiada2.forEach(cadena->LOG.info(cadena.toString()));
+//		Stream<String> lista = Stream.generate(() -> "1751457167").limit(10);
+//		lista.forEach(cadena -> LOG.info(cadena));
+//
+//		// 2.-Consumer
+//		List<Integer> listaNumeros = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+//		listaNumeros.forEach(cadena -> {
+//			LOG.info("" + cadena);
+//		});
+//
+//		// 3.-Predicate
+//		Stream<Integer> listaFinal = listaNumeros.stream().filter(numero -> numero >= 5);
+//		listaFinal.forEach(numero -> LOG.info("valor: " + numero));
+//
+//		// 4.-Function
+//		Stream<String>listaCambiada= listaNumeros.stream().map(numero->{
+//		Integer num=10;
+//		num=numero+num;
+//		return "N: "+num;
+//		});
+//		listaCambiada.forEach(cadena->LOG.info(cadena));
+//
+//		//5.-UnaryOperator
+//		Stream<Integer>listaCambiada2= listaNumeros.stream().map(numero->{
+//			Integer num=10;
+//			num=numero+num;
+//			return num;
+//			});
+//			listaCambiada2.forEach(cadena->LOG.info(cadena.toString()));
 	}
 
 }

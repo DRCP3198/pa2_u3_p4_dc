@@ -25,16 +25,20 @@ public class MetodosReferenciados {
 			nombre.contains("a");
 			return true;
 		}
-
-		public String aplicar(Integer arg) {
-			
-			Integer numero=10;
-			String valorFinal= numero.toString().concat("Mi mama me mima");
-			
-			return  valorFinal;
+		public boolean evaluarPredicate(String arg) {
+			String nombre= "Renato";
+			nombre.contains("a");
+			return true;
 		}
-		
-		public Integer aplicarUnary(Integer arg) {
+		public static boolean predicateHo (Integer num) {
+			return num+1>30;
+		}
+		public static String functionReferenciado(Integer num) {
+          
+
+			return "Sueldo de Dillan "+ num.toString();
+		}
+		public static Integer aplicarUnary(Integer arg) {
 			 
 			if(arg.compareTo(100)>0) {
 				arg=arg*100;
@@ -44,4 +48,5 @@ public class MetodosReferenciados {
 			
 			return arg;
 		}
+		
 }

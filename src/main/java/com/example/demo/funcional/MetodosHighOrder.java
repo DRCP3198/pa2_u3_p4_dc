@@ -16,4 +16,24 @@ public class MetodosHighOrder {
 //		 LOG.info("High Order Consumer ");
 		 funcion.accept(arg);
 	 }
+	
+	public static Boolean metodoPredicate(IPersonaPredicate<Integer> funcion,Integer num) {
+
+		return funcion.evaluar(num);
+
+	}
+
+
+	public static String metodoFuntion(IPersonaFunction<String, Integer> funcion,Integer num) {
+
+		return funcion.aplicar(num);
+
+	}
+
+	public static Integer metodoUnaryOperator(IPersonaUnaryOperator< Integer> funcion,Integer num) {
+
+		return funcion.aplicar(num);
+
+	}
+
 }
