@@ -2,8 +2,11 @@ package com.example.demo.modelo.banco.repo;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.funcional.MetodosReferenciados;
 import com.example.demo.modelo.banco.Transferencia;
 
 import jakarta.persistence.EntityManager;
@@ -15,6 +18,8 @@ import jakarta.transaction.Transactional.TxType;
 @Transactional
 @Repository
 public class TransferenciaRepoImpl implements ITransferenciaRepo{
+	
+	private static final Logger LOG = LoggerFactory.getLogger(MetodosReferenciados .class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
