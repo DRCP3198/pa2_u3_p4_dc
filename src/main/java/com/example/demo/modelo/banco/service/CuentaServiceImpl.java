@@ -22,6 +22,7 @@ public class CuentaServiceImpl implements ICuentaService{
 
 	@Override
 	public void agregar(Cuenta cuentaBancaria) {
+		int i=1;
 		// TODO Auto-generated method stub
 		LOG.info("HILO: " + Thread.currentThread().getName());
 
@@ -31,7 +32,9 @@ public class CuentaServiceImpl implements ICuentaService{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			i=0;
 		}
+		
 		// TODO Auto-generated method stub
 		
 		
@@ -94,7 +97,7 @@ public class CuentaServiceImpl implements ICuentaService{
 		LOG.info("HILO: " + Thread.currentThread().getName());
 
 		try {
-			TimeUnit.SECONDS.sleep(1);
+			TimeUnit.SECONDS.sleep(30);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

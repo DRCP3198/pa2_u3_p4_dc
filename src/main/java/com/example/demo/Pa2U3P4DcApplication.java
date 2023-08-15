@@ -83,7 +83,7 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 		long tiempoInicial = System.currentTimeMillis();
 		List<CompletableFuture<String>> listaRespuestas = new ArrayList<>();
 		List<Cuenta> lista = new ArrayList<>();
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 0; i <= 3; i++) {
 			Cuenta ctaOrigen = new Cuenta();
 			ctaOrigen.setNumero(String.valueOf(i));
 			ctaOrigen.setSaldo(new BigDecimal(100));
@@ -96,11 +96,12 @@ public class Pa2U3P4DcApplication implements CommandLineRunner {
 		// respuestas.
 		//Sentencia que espera que termine de procesarse todos los hilos para obtener
 		//la respuesta
-		CompletableFuture.allOf(listaRespuestas.get(0), listaRespuestas.get(1), listaRespuestas.get(2),
-				listaRespuestas.get(3), listaRespuestas.get(4), listaRespuestas.get(5), listaRespuestas.get(6),
-				listaRespuestas.get(7), listaRespuestas.get(8), listaRespuestas.get(9));
-		
+		CompletableFuture<Void> test=CompletableFuture.allOf(listaRespuestas.get(0), listaRespuestas.get(1), listaRespuestas.get(2));
+		test.get();
 		LOG.info("Respuesta 0: "+ listaRespuestas.get(0).get());
+		LOG.info("Respuesta 1: "+ listaRespuestas.get(1).get());
+		LOG.info("Respuesta 2: "+ listaRespuestas.get(2).get());
+//	
 		long tiempoFinal = System.currentTimeMillis();
 		long tiempoTotal = (tiempoFinal - tiempoInicial) / 1000;
 		LOG.info("Tiempo transcurrido: " + (tiempoFinal - tiempoInicial));
